@@ -19,4 +19,9 @@ export class ShoppingListComponent implements OnInit {
     new Ingridient("Tomatoes", 10)
   ]; 
 
+  // methods 
+  onIngridientAdded(ingridientAdded: Ingridient) {
+    this.ingridients.push(ingridientAdded); 
+  }
+
 }
