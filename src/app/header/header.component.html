@@ -15,9 +15,9 @@
     </ul>
 
     <ul class="nav nav-pills ml-auto">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown"  [appDropdown]="dropdownMenu">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" #dropdownMenu>
             <a class="dropdown-item" href="#">Save Data</a>
             <a class="dropdown-item" href="#">Fetch Data</a>
           </div>
