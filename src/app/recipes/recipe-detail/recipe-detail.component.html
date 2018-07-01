@@ -18,6 +18,7 @@
             Manage Recipe
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #dropdownMenu>
+            <a class="dropdown-item" style="cursor: pointer;" (click)="onAddToShoppingList()">Shopping List</a>
             <a class="dropdown-item" href="#">Save Data</a>
             <a class="dropdown-item" href="#">Fetch Data</a>
           </div>
@@ -33,7 +34,14 @@
 
 <div class="row">
   <div class="col-sm-12">
-    ingridients
+    <ul class="list-group">
+      <!-- this list group will be replicated -->
+      <li 
+      class="list-group-item"
+      *ngFor="let ingridient of recipe.ingridients">
+        {{ ingridient.name }} - {{ ingridient.amount }}
+      </li>
+    </ul>
   </div>
 </div>
 
