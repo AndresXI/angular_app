@@ -1,5 +1,9 @@
     <!-- Replicating this a tag with "*ngFor" -->
-    <a href="#" class="list-group-item clearfix" (click)="onSelected()">
+    <a 
+       routerLinkActive="active"
+       [routerLink]="[index]"
+       style="cursor: pointer;"
+       class="list-group-item clearfix">
       <div class="float-left">
         <!-- Receiving data from recipe list comp -->
         <h4 class="list-goup-item-heading">{{ recipe.name }}</h4>

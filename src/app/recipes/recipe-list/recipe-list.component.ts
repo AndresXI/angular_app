@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from "../recipe.model"; 
 import { RecipeService } from '../recipe.service'; 
+import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -10,7 +11,9 @@ import { RecipeService } from '../recipe.service';
 export class RecipeListComponent implements OnInit {
 
   // we must inject our recipeService
-  constructor(private recipeService: RecipeService) { 
+  constructor(private recipeService: RecipeService, 
+    private router: Router, 
+    private route: ActivatedRoute) { 
 
   }
 
@@ -21,5 +24,10 @@ export class RecipeListComponent implements OnInit {
   // variables
   recipes: Recipe[]; 
 
+  // methods 
+  onNewRecipe() {
+    // targeting the path we want to go 
+    this.router.navigate(['new'], {relativeTo: this.route}); 
+  }
 
 }

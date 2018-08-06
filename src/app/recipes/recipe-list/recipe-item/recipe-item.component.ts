@@ -1,6 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Recipe } from '../../recipe.model'; 
-import { RecipeService } from '../../recipe.service'; 
 
 
 @Component({
@@ -10,9 +9,6 @@ import { RecipeService } from '../../recipe.service';
 })
 export class RecipeItemComponent implements OnInit {
 
-  // injecting our recipeService
-  constructor(private recipeServie: RecipeService) { }
-
   ngOnInit() {
     
   }
@@ -20,10 +16,6 @@ export class RecipeItemComponent implements OnInit {
   // vars 
   // here input receives data 
   @Input() recipe: Recipe; // making it bindable to the recipe-list comp
-
-  // methods 
-  onSelected() {
-      this.recipeServie.recipeSelected.emit(this.recipe); 
-   }
+  @Input() index: number; 
     
 }
