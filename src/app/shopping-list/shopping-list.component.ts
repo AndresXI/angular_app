@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ingridient } from '../shared/ingridient.model';
 import { ShoppingListService } from './shopping-list.service';  
+import { Subscription } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
+   //variabels 
+  ingridients: Ingridient[]; 
+  private subscription: Subscription; 
 
   // injecting our shopping-list service 
   constructor(private shoppingListService: ShoppingListService) { }
@@ -16,14 +20,16 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit() {
     this.ingridients = this.shoppingListService.getIngridients(); 
     // updating our ingridients array after the user add new items 
-    this.shoppingListService.ingridientsUpdated.subscribe(
+    this.subscription = this.shoppingListService.ingridientsUpdated.subscribe(
       (ingridients: Ingridient[]) => {
         this.ingridients = ingridients; 
       }
     ); 
   }
 
-  //variabels 
-  ingridients: Ingridient[]; 
+  ngOnDestroy() {
+    // used to prevent any memmory leaks 
+    this.subscription.unsubscribe(); 
+  }
 
 }
