@@ -39,7 +39,7 @@ export class RecipeService {
 
     // loading a recipe with an id 
     getRecipe(index: number) {
-        return this.recipes[index]; 
+        return this.recipes[index]; // returns the js object 
     }
 
     addIngridientsToShoppingList(ingridients: Ingridient[]) {
