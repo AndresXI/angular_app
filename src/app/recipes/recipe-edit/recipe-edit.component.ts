@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '../../../../node_modules/@angular/router';
-import { FormGroup, FormControl, FormArray } from '../../../../node_modules/@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '../../../../node_modules/@angular/forms';
 import { RecipeService } from '../recipe.service';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -18,7 +19,7 @@ export class RecipeEditComponent implements OnInit {
   ngOnInit() {
     // retreiving the id 
     this.route.params.subscribe(
-      (params: Params) => {
+      (params: Params) => { // reacting to the click event 
         this.id = +params['id']; 
         // creating a new recipe not in edit mode
         this.editMode = params['id'] != null; // checking in wich mode we are on
@@ -45,23 +46,55 @@ export class RecipeEditComponent implements OnInit {
         for (let ingridients of recipe.ingridients) {
           recipeIngridients.push(
             new FormGroup({ // has two pairs 
-              'name': new FormControl(ingridients.name),
-              'amount': new FormControl(ingridients.amount)
+              'name': new FormControl(ingridients.name, Validators.required),
+              'amount': new FormControl(ingridients.amount, [
+                Validators.required, 
+                Validators.pattern(/^[1-9]+[0-9]*$/)
+              ])
             })
           ); 
         }
       }
     } 
     this.recipeForm = new FormGroup({
-      'name': new FormControl(recipeName),
-      'imagePath': new FormControl(recipeImagePath), 
-      'description': new FormControl(recipeDescription),
+      'name': new FormControl(recipeName, Validators.required),
+      'imagePath': new FormControl(recipeImagePath, Validators.required), 
+      'description': new FormControl(recipeDescription, Validators.required),
       'ingridients': recipeIngridients
     }); 
   }
 
   onSubmit() {
-    console.log(this.recipeForm); 
+    // configuring our new recipe --> add all the fields for a recipe 
+    const newRecipe = new Recipe( // we get all the fields from the recipeForm.value 
+      this.recipeForm.value['name'],
+      this.recipeForm.value['description'],
+      this.recipeForm.value['imagePath'],
+      this.recipeForm.value['ingridients']); 
+    if (this.editMode) { // if in edit mode update recipe 
+      this.recipeService.updateRecipe(this.id, newRecipe); 
+    } else { // if not in edit mode than create a new recipe 
+      this.recipeService.addRecipe(newRecipe); 
+    }
+    // console.log(this.recipeForm); 
   }
 
-} // end component class 
+  onAddIngridient() {
+    // we get the array and then push a new form group 
+    (<FormArray>this.recipeForm.get('ingridients')).push(
+      // we then push the form group of two controllers 
+      new FormGroup({
+        'name': new FormControl(null, Validators.required), 
+        'amount': new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ])
+      })
+    );
+
+  } 
+
+
+
+} // end component class  
+

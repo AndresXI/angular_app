@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
+  // VARIABLES 
+  recipes: Recipe[]; 
 
   // we must inject our recipeService
   constructor(private recipeService: RecipeService, 
@@ -17,14 +19,18 @@ export class RecipeListComponent implements OnInit {
 
   }
 
+  // METHODS
   ngOnInit() {
+    // listening to the subscibe event if changed 
+    this.recipeService.recipesChanged.subscribe(
+      (recipes: Recipe[]) => {
+        // update our recipe 
+        this.recipes = recipes; 
+      }
+    )
     this.recipes = this.recipeService.getRecipes(); 
   }
-
-  // variables
-  recipes: Recipe[]; 
-
-  // methods 
+ 
   onNewRecipe() {
     // targeting the path we want to go 
     this.router.navigate(['new'], {relativeTo: this.route}); 
