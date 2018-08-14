@@ -1,24 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '../../../../node_modules/@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '../../../../node_modules/@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '../../../../node_modules/@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css']
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, OnDestroy {
   recipeForm: FormGroup; 
   id: number; 
   editMode = false; 
+  subscription: Subscription; 
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(private route: ActivatedRoute, 
+    private router: Router,
+    private recipeService: RecipeService) { }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe(); 
+  }  
 
   ngOnInit() {
     // retreiving the id 
-    this.route.params.subscribe(
+    this.subscription = this.route.params.subscribe(
       (params: Params) => { // reacting to the click event 
         this.id = +params['id']; 
         // creating a new recipe not in edit mode
@@ -76,6 +84,7 @@ export class RecipeEditComponent implements OnInit {
     } else { // if not in edit mode than create a new recipe 
       this.recipeService.addRecipe(newRecipe); 
     }
+    this.onCancel(); // navigating away after submitting 
     // console.log(this.recipeForm); 
   }
 
@@ -93,6 +102,15 @@ export class RecipeEditComponent implements OnInit {
     );
 
   } 
+
+  onCancel() {
+    // access the route and navigate up one level 
+    this.router.navigate(['../'], {relativeTo: this.route}); 
+  }
+
+  onDeleteIngridient(index: number) {
+    (<FormArray>this.recipeForm.get('ingridients')).removeAt(index); 
+  }
 
 
 
