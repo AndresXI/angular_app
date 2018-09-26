@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Response } from '@angular/http'; 
+import { DataStorageService } from '../shared/data-storage.service';
 
 
 @Component({
@@ -8,11 +10,19 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  constructor() { 
-
-  }
+  constructor(private dataStorage: DataStorageService) { }
 
   ngOnInit() {
   }
+
+  onSave() {
+    this.dataStorage.storeRecipes() // store data on firebase 
+      .subscribe(
+        (response: Response) => {
+          console.log(response); 
+        }
+      ); 
+  }
+
 
 }
