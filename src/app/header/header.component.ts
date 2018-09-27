@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Response } from '@angular/http'; 
 import { DataStorageService } from '../shared/data-storage.service';
+import { RecipeService } from '../recipes/recipe.service'; 
 
 
 @Component({
@@ -10,7 +11,8 @@ import { DataStorageService } from '../shared/data-storage.service';
 })
 export class HeaderComponent {
 
-  constructor(private dataStorage: DataStorageService) { }
+  constructor(private dataStorage: DataStorageService, 
+    private recipeService: RecipeService) { }
 
   ngOnInit() {
   }
@@ -23,6 +25,10 @@ export class HeaderComponent {
         }
       ); 
   }
+  
+  onFetchData() {
+    this.dataStorage.getRecipes(); 
+  }
 
 
-}
+} // End header component 

@@ -7,6 +7,8 @@ import { Subject } from "rxjs";
 // Injecting a service into a service 
 @Injectable() 
 export class RecipeService {
+
+    // What does this Subject mean? 
     recipesChanged = new Subject<Recipe[]>(); 
     // injecting our shopping list Service 
     constructor(private slService: ShoppingListService) {
@@ -32,6 +34,14 @@ export class RecipeService {
          ])
       ]; 
 
+    // seting new recipes 
+    setRecipes(recipes: Recipe[]) {
+        // replace existing recipes with new existing recipes
+        this.recipes = recipes; 
+        // pass a copy of the new recipe array 
+        this.recipesChanged.next(this.recipes.slice()); 
+
+    }  
     
     getRecipes() {
         // here we only get a copy of our array 
