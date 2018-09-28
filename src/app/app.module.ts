@@ -17,7 +17,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
-import { DataStorageService } from './shared/data-storage.service'; 
+import { DataStorageService } from './shared/data-storage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component'; 
+import { AuthService } from './auth/auth.service';
  
 
 @NgModule({
@@ -32,7 +35,9 @@ import { DataStorageService } from './shared/data-storage.service';
     ShoppingEditComponent,
     DropdownDirective,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,10 @@ import { DataStorageService } from './shared/data-storage.service';
     HttpModule
   ],
   // we will need the shoppingListService and the RecipeService throughout the whole app 
-  providers: [ShoppingListService, RecipeService, DataStorageService],
+  providers: [ShoppingListService, 
+    RecipeService, 
+    DataStorageService,
+    AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

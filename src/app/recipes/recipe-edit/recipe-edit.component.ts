@@ -50,7 +50,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       recipeImagePath = recipe.imgPath; 
       recipeDescription = recipe.description; 
       // check if we have any ingridients 
-      if (recipe['ingridients']) { // checking if its defined 
+      if (recipe['ingridients']) { // checking for the ingridents property 
         for (let ingridients of recipe.ingridients) {
           recipeIngridients.push(
             new FormGroup({ // has two pairs 

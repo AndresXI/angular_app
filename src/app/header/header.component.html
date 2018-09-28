@@ -14,15 +14,20 @@
         <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
       </li>
     </ul>
-
     <ul class="nav nav-pills ml-auto">
-        <li class="nav-item dropdown"  [appDropdown]="dropdownMenu">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
-          <div class="dropdown-menu" #dropdownMenu>
-            <a class="dropdown-item" style="cursor: pointer;" (click)="onSave()">Save Data</a>
-            <a class="dropdown-item" style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a>
-          </div>
-        </li>
-      </ul>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link register" routerLink="signup">Register</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link register" routerLink="signin">Signin</a>
+      </li>
+      <li class="nav-item dropdown"  [appDropdown]="dropdownMenu">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
+        <div class="dropdown-menu" #dropdownMenu>
+          <a class="dropdown-item" style="cursor: pointer;" (click)="onSave()">Save Data</a>
+          <a class="dropdown-item" style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>
