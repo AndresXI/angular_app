@@ -1,11 +1,16 @@
 import * as firebase from 'firebase';
+import { Router } from '@angular/router'; 
+import { Injectable } from '@angular/core';
 
-
+@Injectable()  
 export class AuthService {
 
     /** String for the token **/
     token: string; 
-
+    /** Inject the router so we can redirect the user 
+     * back after they signed in.  
+    **/
+    constructor(private router: Router) {}
 
     /** Firebse sign up user method. 
      * @param email user email 
@@ -25,6 +30,8 @@ export class AuthService {
         .then(
             // returns the response if it was successful 
             response => {
+                // redirect the user 
+                this.router.navigate(['/']); 
                 firebase.auth().currentUser.getIdToken()
                     .then(
                         // returns the token as a string 
@@ -47,4 +54,25 @@ export class AuthService {
         // return the token as a string 
         return this.token; 
     }
+
+    /** Method that checks if the user 
+    * is authenticated. 
+    **/
+    isAuthenticated() {
+        return this.token != null; 
+    }
+
+    /** 
+     * Logging the user out 
+     * by reseting the token. 
+     **/
+    logout() {
+        // boolean value 
+        firebase.auth().signOut(); 
+        this.token = null; 
+    }
+
+
+
+
 }

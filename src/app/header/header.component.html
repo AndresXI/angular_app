@@ -15,14 +15,28 @@
       </li>
     </ul>
     <ul class="nav nav-pills ml-auto">
+      <!-- Wrapping multiple elements into one condition,
+           Display elemnets if the user is not authenticated 
+      -->
+      <ng-template [ngIf]="!authService.isAuthenticated()">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link register" routerLink="signup">Register</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link register" routerLink="signin">Signin</a>
+        </li>
+      </ng-template>
+      <!-- Render this link if the user is authenticated -->
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link register" routerLink="signup">Register</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link register" routerLink="signin">Signin</a>
+        <a class="nav-link register" style="cursor: pointer;" 
+        *ngIf="authService.isAuthenticated()" (click)="onLogout()">Logout</a>
       </li>
       <li class="nav-item dropdown"  [appDropdown]="dropdownMenu">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
+        <!-- Display the elements if the user is authenticated -->
+        <a class="nav-link dropdown-toggle" *ngIf="authService.isAuthenticated()" 
+          data-toggle="dropdown" style="cursor: pointer;" 
+          role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
+
         <div class="dropdown-menu" #dropdownMenu>
           <a class="dropdown-item" style="cursor: pointer;" (click)="onSave()">Save Data</a>
           <a class="dropdown-item" style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a>
