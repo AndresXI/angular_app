@@ -16,20 +16,22 @@ export class DataStorageService {
         private authService: AuthService) {}
 
     storeRecipes() {
+        const token = this.authService.getToken();
         // constantly override data on firebase, second parameter is the things we
         // want to put in our data base 
-        return this.http.put("https://recipe-book-ng-b1e34.firebaseio.com/recipes.json", 
-        this.recipeService.getRecipes()); 
+        return this.http.put("https://recipe-book-ng-b1e34.firebaseio.com/recipes.json?auth=" +
+        token, this.recipeService.getRecipes()); 
     }
 
     /** Gets the recipes from firebase. 
      * @returns http request from firebase as an observable. 
      **/
     getRecipes() { 
-       // geting the token from firebase as a promise
+       // geting the token from firebase as a promise.
        const token = this.authService.getToken(); 
       
         // because we are getting back a token we need to add a query paramter
+        // to authenticate the user
         this.http.get("https://recipe-book-ng-b1e34.firebaseio.com/recipes.json?auth=" 
         + token)
         .pipe(map(
