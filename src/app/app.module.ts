@@ -1,3 +1,4 @@
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
@@ -24,8 +25,6 @@ import { SharedMoudlue } from './shared/shared.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
     SignupComponent,
     SigninComponent
   ],
@@ -36,6 +35,7 @@ import { SharedMoudlue } from './shared/shared.module';
     AppRoutingModule,
     HttpModule, 
     RecipesModule,
+    ShoppingListModule,
     SharedMoudlue // --> includes the dropdown directive 
   ],
   /** All the services provided in this app **/

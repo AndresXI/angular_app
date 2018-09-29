@@ -14,7 +14,6 @@ import { AuthGuard } from './auth/auth-guard.service';
 const appRoutes: Routes = [
     // here each javascript object represents a route 
     { path: "", redirectTo: "/recipes", pathMatch: "full"},
-    { path: 'shopping-list', component: ShoppingListComponent },
     { path: 'signup', component:  SignupComponent}, 
     { path: 'signin', component: SigninComponent}  
 ]; 
