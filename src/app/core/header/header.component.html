@@ -18,7 +18,7 @@
       <!-- Wrapping multiple elements into one condition,
            Display elemnets if the user is not authenticated 
       -->
-      <ng-template [ngIf]="!authService.isAuthenticated()">
+      <ng-template [ngIf]="!isAuthenticated()">
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link register" routerLink="signup">Register</a>
         </li>
@@ -29,11 +29,11 @@
       <!-- Render this link if the user is authenticated -->
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link register" style="cursor: pointer;" 
-        *ngIf="authService.isAuthenticated()" (click)="onLogout()">Logout</a>
+        *ngIf="isAuthenticated()" (click)="onLogout()">Logout</a>
       </li>
       <li class="nav-item dropdown"  [appDropdown]="dropdownMenu">
         <!-- Display the elements if the user is authenticated -->
-        <a class="nav-link dropdown-toggle" *ngIf="authService.isAuthenticated()" 
+        <a class="nav-link dropdown-toggle" *ngIf="isAuthenticated()" 
           data-toggle="dropdown" style="cursor: pointer;" 
           role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
 

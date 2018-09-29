@@ -1,7 +1,7 @@
 import { HomeComponent } from './core/home/home.component';
 
 import { NgModule } from "../../node_modules/@angular/core";
-import { Routes, RouterModule } from '@angular/router'; 
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router'; 
 
 
 
@@ -16,11 +16,14 @@ const appRoutes: Routes = [
 
 @NgModule({
     // here our routes are now configured
-    imports: [RouterModule.forRoot(appRoutes)], 
+    imports: [
+        // preloading the mocules that are loading lazily 
+        RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
+    ], 
     // export our router module to the app module 
     exports: [RouterModule]
 })
 // this class will bundle all of the routing functinality 
 export class AppRoutingModule {
-
+    
 }
