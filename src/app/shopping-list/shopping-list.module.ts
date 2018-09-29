@@ -7,7 +7,10 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 
 @NgModule({
-  declarations: [ShoppingListComponent, ShoppingEditComponent],
+  declarations: [
+      ShoppingListComponent, 
+      ShoppingEditComponent
+    ],
   imports: [
     CommonModule, // Gives access to common directives --> Comon Module
     ReactiveFormsModule,

@@ -13,7 +13,7 @@ const shoppingListRoutes: Routes = [
       RouterModule.forChild(shoppingListRoutes)
     ],
   exports: [
-       RouterModule
+      RouterModule
   ]
 })
 export class ShoppingListRoutingModule {}
