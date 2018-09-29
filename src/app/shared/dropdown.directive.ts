@@ -17,8 +17,8 @@ export class DropdownDirective implements OnInit {
         this.isOpen = !this.isOpen; 
         this.appDropdown.classList.toggle(this.classToShowDropdown, this.isOpen);
     }
-
+    
     ngOnInit() {
-
+        
     }
 }
