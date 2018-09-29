@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http'; 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeService } from './recipes/recipe.service';
@@ -12,15 +11,14 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { SharedMoudlue } from './shared/shared.module';
 import { AuthMoudule } from './auth/auth.module';
-import { HomeComponent } from './home/home.component';
+import { CoreModule } from './core/core.module';
  
 
 @NgModule({
   /** All the components, directives, and pipes this module uses */
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
+    // this declarations array should always look like this 
+    AppComponent
   ],
   /** The other modules this module uses */
   imports: [
@@ -29,6 +27,7 @@ import { HomeComponent } from './home/home.component';
     HttpModule, 
     ShoppingListModule,
     AuthMoudule,
+    CoreModule,
     SharedMoudlue // --> includes the dropdown directive 
   ],
   /** All the services provided in this app **/

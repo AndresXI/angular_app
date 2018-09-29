@@ -1,8 +1,8 @@
-import { AuthService } from './../auth/auth.service';
+import { AuthService } from './../../auth/auth.service';
 import { Component } from '@angular/core';
 import { Response } from '@angular/http'; 
-import { DataStorageService } from '../shared/data-storage.service';
-import { RecipeService } from '../recipes/recipe.service'; 
+import { DataStorageService } from '../../shared/data-storage.service';
+import { RecipeService } from '../../recipes/recipe.service'; 
 
 
 @Component({
