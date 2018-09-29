@@ -13,21 +13,20 @@ import { SharedMoudlue } from '../shared/shared.module';
 @NgModule({
   declarations: [
     // all recipe related feature modules
-    // CANNOT DUPLICATE DECLARATIONS 
+    // CANNOT DUPLICATE DECLARATIONS
     RecipesComponent,
     RecipeStartComponent,
     RecipeListComponent,
     RecipeEditComponent,
     RecipeDetailComponent,
-    RecipeItemComponent,
+    RecipeItemComponent
   ],
   // These imports are recognized by angular
   imports: [
-    // Gives access to common directives --> Comon Module 
-    CommonModule,
+    CommonModule, // Gives access to common directives --> Comon Module
     ReactiveFormsModule,
     RecipesRoutingModule,
-    SharedMoudlue
+    SharedMoudlue // --> DropDown directive 
   ]
 }) // this turns this class into a module
 /** Recipe Module that will hold all the recipies related feature **/
